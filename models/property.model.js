@@ -12,5 +12,6 @@ var propertySchema=new mongoose.Schema({
 {
     timestamps:false
 });
+propertySchema.index({title:"text"});
 var property=mongoose.model("Property",propertySchema,"properties")
 module.exports=property;
