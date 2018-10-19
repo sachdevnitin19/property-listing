@@ -5,7 +5,7 @@
         "script":"./bin/www",
         "watch":true,
         
-        "ignore_watch":["node_modules","uploads"],
+        "ignore_watch":["node_modules","uploads",".git"],
         "env":{
             "NODE_ENV":"development",
             "PORT":"3000",
