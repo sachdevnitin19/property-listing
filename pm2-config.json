@@ -1,0 +1,27 @@
+{
+"apps":[
+    {
+        "name":"propertyApp",
+        "script":"./bin/www",
+        "watch":true,
+        
+        "ignore_watch":["node_modules","uploads"],
+        "env":{
+            "NODE_ENV":"development",
+            "PORT":"3000",
+            "DB_URL":"@ds221339.mlab.com:21339",
+            "DB_USERNAME":"admin",
+            "DB_PASSWORD":"admin123",
+            "DB_NAME":"property-listing"
+        },
+        "env_prod":{
+            "NODE_ENV":"production",
+            "PORT":"3000",
+            "DB_URL":"@mongo:27017",
+            "DB_USERNAME":"admin",
+            "DB_PASSWORD":"admin123",
+            "DB_NAME":"property-listing"
+        }
+    }
+]
+}
