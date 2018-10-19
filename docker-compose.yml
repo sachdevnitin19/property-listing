@@ -9,12 +9,12 @@ services:
       - mongo
   mongo:
     container_name: mongodb
-    image: mongo
+    image: bitnami/mongodb:latest
     volumes:
-      - ./data/db:/data/db
-      - "$PWD/mongo-entrypoint/:/docker-entrypoint-initdb.d/"
+      - ../data/db:/bitnami
     environment:
-      MONGO_INITDB_ROOT_USERNAME: root
-      MONGO_INITDB_ROOT_PASSWORD: admin123
+      - MONGODB_USERNAME=admin
+      - MONGODB_PASSWORD=admin123
+      - MONGODB_DATABASE=property-listing
     ports:
       - '27017:27017'
