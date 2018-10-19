@@ -7,4 +7,4 @@ COPY package*.json ./
 RUN npm install
 
 COPY . .
-CMD ["pm2-docker", "start", "pm2-config.json", "--env",  "prod"]
+CMD ["pm2-docker", "start", "pm2-config.json"]

@@ -9,15 +9,12 @@ services:
       - mongo
   mongo:
     container_name: mongodb
-    image: aashreys/mongo-auth:latest
+    image: mongo
     volumes:
-      - ../data/db:/data/db
+      - ./data/db:/data/db
+      - "$PWD/mongo-entrypoint/:/docker-entrypoint-initdb.d/"
     environment:
-      - AUTH=yes
-      - MONGODB_ADMIN_USER=admin
-      - MONGODB_ADMIN_PASS=admin123
-      - MONGODB_APPLICATION_DATABASE=property-listing
-      - MONGODB_APPLICATION_USER=admin
-      - MONGODB_APPLICATION_PASS=admin123
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: admin123
     ports:
       - '27017:27017'
