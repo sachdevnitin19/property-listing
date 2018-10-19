@@ -9,12 +9,15 @@ services:
       - mongo
   mongo:
     container_name: mongodb
-    image: mongo
+    image: aashreys/mongo-auth:latest
     volumes:
       - ../data/db:/data/db
     environment:
-      MONGO_INITDB_DATABASE: property-listing
-      MONGO_INITDB_ROOT_USERNAME: admin
-      MONGO_INITDB_ROOT_PASSWORD: admin123
+      - AUTH=yes
+      - MONGODB_ADMIN_USER=admin
+      - MONGODB_ADMIN_PASS=admin123
+      - MONGODB_APPLICATION_DATABASE=property-listing
+      - MONGODB_APPLICATION_USER=admin
+      - MONGODB_APPLICATION_PASS=admin123
     ports:
       - '27017:27017'
