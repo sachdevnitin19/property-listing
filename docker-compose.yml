@@ -12,6 +12,6 @@ services:
     image: mongo
     volumes:
       - ./data/db:/data/db
-      - "$PWD/mongo-entrypoint/:/docker-entrypoint-initdb.d/"
+      - "./mongo-entrypoint/:/docker-entrypoint-initdb.d/"
     ports:
       - '27017:27017'
