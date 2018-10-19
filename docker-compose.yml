@@ -5,8 +5,14 @@ services:
     build: .
     ports:
      - "3000:3000"
-    links:
+    depends_on:
       - mongo
+  fix-mongo-permissions:
+    image: 'bitnami/mongodb:latest'
+    user: root
+    command: chown -R 1001:1001 /bitnami
+    volumes:
+      - ../data/db:/bitnami
   mongo:
     container_name: mongodb
     image: bitnami/mongodb:latest
@@ -18,3 +24,5 @@ services:
       - MONGODB_DATABASE=property-listing
     ports:
       - '27017:27017'
+    depends_on:
+      - fix-mongo-permissions
