@@ -24,15 +24,20 @@ app.set('port', port);
  */
 var options = {
   promiseLibrary: Promise,
-  useNewUrlParser: true
+  useNewUrlParser: true,
+  reconnectTries: Number.MAX_VALUE, // Never stop trying to reconnect
+  reconnectInterval: 500, // Reconnect every 500ms
 }
 
 var MONGO_URL = 'mongodb://' + process.env.DB_USERNAME + ':' + process.env.DB_PASSWORD + process.env.DB_URL + '/' + process.env.DB_NAME ;
 console.log(MONGO_URL);
-mongoose.connect(MONGO_URL, options, function (err) {
+mongoose.connect(MONGO_URL, options).then(function(){
+  console.log('Mongoose connection status code:', mongoose.connection.readyState);
+},function (err) {
   if (err) throw err;
+  console.error("error occurred while connecting to mongodb.");
 });
-console.log('Mongoose connection status code:', mongoose.connection.readyState);
+
 
 
 
