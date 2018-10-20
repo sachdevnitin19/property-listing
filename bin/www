@@ -29,7 +29,7 @@ var options = {
   reconnectInterval: 500, // Reconnect every 500ms
 }
 
-var MONGO_URL = 'mongodb://' + process.env.DB_USERNAME + ':' + process.env.DB_PASSWORD + process.env.DB_URL + '/' + process.env.DB_NAME ;
+var MONGO_URL = 'mongodb://' + process.env.DB_USERNAME + ':' + process.env.DB_PASSWORD + process.env.DB_URL + '/' + process.env.DB_NAME + '?authSource='+process.env.AUTH_DB_NAME ;
 
 const connectWithRetry = () => {
   console.log('tring to connect to mongodb')

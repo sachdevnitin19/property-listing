@@ -11,7 +11,6 @@ router.get('/', function (req, res) {
 
 // Dumps data directly into db.
 router.post('/property', upload.single('propertyFile'), function (req, res) {
-  console.log(req.file);
   let propertyList = {};
   let promiseArr = [];
   if(!req.file) res.status(400).json({Status:"error",message:"JSON file with property data is required."});
@@ -27,7 +26,6 @@ router.post('/property', upload.single('propertyFile'), function (req, res) {
         propertyList.data.forEach(propertyData => {
           promiseArr.push(new Property(propertyData).save());
         });
-        console.log(`data length ${propertyList.length}`);
 
         Promise.all(promiseArr).then(function (results) {
           res.json({ Status: "Success" });
@@ -36,13 +34,11 @@ router.post('/property', upload.single('propertyFile'), function (req, res) {
             console.error(err);
             res.status(500).json({ status: "Error", message: "some error occured while inserting data in db" });
           });
-
       } catch (jsonErr) {
         console.error(jsonErr);
         res.status(400).json({ status: "Error", message: "Invalid json file" });
       }
     }
-
   });
 })
 

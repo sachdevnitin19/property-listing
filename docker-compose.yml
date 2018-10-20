@@ -5,24 +5,15 @@ services:
     build: .
     ports:
      - "3000:3000"
-    depends_on:
+    links:
       - mongo
-  fix-mongo-permissions:
-    image: 'bitnami/mongodb:latest'
-    user: root
-    command: chown -R 1001:1001 /bitnami
-    volumes:
-      - ../data/db:/bitnami
   mongo:
     container_name: mongodb
-    image: bitnami/mongodb:latest
+    image: mongo
     volumes:
-      - ../data/db:/bitnami
+      - ../data/db:/data/db
     environment:
-      - MONGODB_USERNAME=admin
-      - MONGODB_PASSWORD=admin123
-      - MONGODB_DATABASE=property-listing
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: admin123
     ports:
       - '27017:27017'
-    depends_on:
-      - fix-mongo-permissions
