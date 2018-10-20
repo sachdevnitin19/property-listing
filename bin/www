@@ -30,15 +30,18 @@ var options = {
 }
 
 var MONGO_URL = 'mongodb://' + process.env.DB_USERNAME + ':' + process.env.DB_PASSWORD + process.env.DB_URL + '/' + process.env.DB_NAME ;
-console.log(MONGO_URL);
-mongoose.connect(MONGO_URL, options).then(function(){
-  console.log('Mongoose connection status code:', mongoose.connection.readyState);
-},function (err) {
-  if (err) throw err;
-  console.error("error occurred while connecting to mongodb.");
-});
 
+const connectWithRetry = () => {
+  console.log('tring to connect to mongodb')
+  mongoose.connect(MONGO_URL, options).then(()=>{
+    console.log('MongoDB is connected')
+  }).catch(err=>{
+    console.log('MongoDB connection unsuccessful, retry after 5 seconds.')
+    setTimeout(connectWithRetry, 5000)
+  })
+}
 
+connectWithRetry()
 
 
 /**
